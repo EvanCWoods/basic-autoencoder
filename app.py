@@ -22,19 +22,8 @@ def raw_data_info(train_data, test_data):
 raw_data_info(train_data=train_data, test_data=test_data)
 
 
-# Function to preprocess the data
-def preprocess(train_data, test_data):
-    print('Preprocessed:')
-    train_data = train_data / 255 
-    print('Train data min: ', train_data.min())
-    print('Train data max: ', train_data.max())
-    test_data = test_data / 255
-    print('Test data min: ', test_data.min())
-    print('Test dat max: ', test_data.max())
-    print('</--DONE--\>')
-    
-preprocess(train_data=train_data, test_data=test_data)
-
+train_data = train_data / 255 
+test_data = test_data / 255
 
 
 tf.random.set_seed(42)
