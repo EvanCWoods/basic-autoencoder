@@ -36,7 +36,7 @@ preprocess(train_data=train_data, test_data=test_data)
 
 
 tf.random.set_seed(42)
-stacked_encoder = tf.keras.Sequential([
+encoder = tf.keras.Sequential([
   tf.keras.layers.Flatten(input_shape=[28,28]),
   tf.keras.layers.Dense(256, activation='selu'),
   tf.keras.layers.Dense(128, activation='selu'),
@@ -44,7 +44,7 @@ stacked_encoder = tf.keras.Sequential([
   tf.keras.layers.Dense(30, activation='selu'),
 ])
 
-stacked_decoder = tf.keras.Sequential([
+decoder = tf.keras.Sequential([
   tf.keras.layers.Dense(256, activation='selu', input_shape=[30]),
   tf.keras.layers.Dense(128, activation='selu'),
   tf.keras.layers.Dense(64, activation='selu'),
@@ -52,11 +52,11 @@ stacked_decoder = tf.keras.Sequential([
   tf.keras.layers.Reshape([28, 28])
 ])
 
-stacked_ae = tf.keras.models.Sequential([stacked_encoder, stacked_decoder])
+stacked_ae = tf.keras.models.Sequential([encoder, decoder])
 stacked_ae.compile(loss='binary_crossentropy',
                    optimizer=tf.keras.optimizers.Adam())
 
-history = stacked_ae.fit(train_data, train_data, epochs=20,
+history = stacked_autoencoder.fit(train_data, train_data, epochs=20,
                          validation_data=(test_data, test_data))
 
 def plot_image(image):
